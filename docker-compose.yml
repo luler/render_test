@@ -1,0 +1,9 @@
+version: "1"
+
+services:
+  test:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
