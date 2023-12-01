@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>简易助手工具</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="shortcut icon"
+          href="https://illlustrations.co/static/7fdea21037f680a946e430532feed521/112-installing.svg">
+</head>
+<script src="js/bootstrap.js"></script>
+<body>
+
+<figure style="margin-top: 20px;" class="text-center">
+    <blockquote class="blockquote">
+        <p>根据正则表达式，自动匹配输入字符串中所有的内容</p>
+    </blockquote>
+    <figcaption class="blockquote-footer">
+        左边为输入内容，右边为提取结果，多个匹配结果以英文逗号隔开
+    </figcaption>
+</figure>
+<div class="row" style="padding: 20px 50px">
+    <div class="col-lg-5">
+        <textarea
+                id="text1"
+                class="form-control"
+                placeholder="请输入待处理字符串"
+                rows="15"
+        ></textarea>
+        <!--    <input type="text" class="form-control" placeholder="First name" aria-label="First name">-->
+    </div>
+    <div class="col-lg-2">
+        <div style="display: inline-block;position:relative;left: 50%;top: 50%;transform: translate(-50%,-50%);text-align: center">
+            <label>分隔符</label>
+            <input id="exp1" type="text" value="," placeholder="请输入" class="form-control" list="data_list1"/>
+            <datalist id="data_list1">
+                <option>,</option>
+                <option>|</option>
+                <option>#</option>
+            </datalist>
+            <br/>
+            <label>包围符号</label>
+            <input id="exp2" type="text" value='"' placeholder="请输入" class="form-control" list="data_list2"/>
+            <datalist id="data_list2">
+                <option>"</option>
+                <option>'</option>
+            </datalist>
+            <br/>
+            <label>正则表达式</label>
+            <input id="exp3" type="text" value="\d+" placeholder="请输入" class="form-control" list="data_list3"/>
+            <datalist id="data_list3">
+                <option>\d+</option>
+                <option>\w+</option>
+            </datalist>
+            <br/>
+            <button
+                    onclick="extractContent()"
+                    class="btn btn-primary"
+            >
+                提取
+            </button>
+            <script>
+                function extractContent() {
+                    var text1 = document.getElementById('text1').value
+                    var exp3 = document.getElementById('exp3').value //正则表达式
+                    var exp2 = document.getElementById('exp2').value //包围符号
+                    var exp1 = document.getElementById('exp1').value //分隔符
+                    var reg = new RegExp(exp3, 'img')
+
+                    var result = text1.match(reg) || []
+                    for (const resultKey in result) {
+                        result[resultKey] = exp2 + result[resultKey] + exp2
+                    }
+                    document.getElementById('text11').value = result.join(exp1)
+                }
+            </script>
+        </div>
+
+    </div>
+    <div class="col-lg-5">
+        <textarea
+                id="text11"
+                class="form-control"
+                placeholder="提取结果..."
+                rows="15"
+        ></textarea>
+    </div>
+</div>
+
+</body>
+</html>
