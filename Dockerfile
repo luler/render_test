@@ -1,5 +1,5 @@
 FROM dreamplay/hello_id:latest
 
-ENV PORT=80
+ENV PORT=10000
 
-EXPOSE 80
+EXPOSE 10000
